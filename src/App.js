@@ -7,6 +7,7 @@ import { Users } from "./components/Users";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [invites, setInvites] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
 
@@ -27,6 +28,14 @@ function App() {
     setSearchValue(event.target.value);
   };
 
+  const onClickInvite = (id) => {
+    if (invites.includes(id)) {
+      setInvites((prev) => prev.filter((_id) => _id !== id));
+    } else {
+      setInvites((prev) => [...prev, id]);
+    }
+  };
+
   return (
     <div className="App">
       <Users
@@ -34,6 +43,8 @@ function App() {
         searchValue={searchValue}
         items={users}
         isLoading={isLoading}
+        invites={invites}
+        onClickInvite={onClickInvite}
       />
       {/* <Success /> */}
     </div>
